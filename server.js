@@ -23,7 +23,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 
 
 // get products depending on page number
-router.get('/', async (req, res) => {
+router.get('/products', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -40,7 +40,7 @@ router.get('/', async (req, res) => {
 
     // arrange products depending on page number
     const products = await cursor.skip(page * itemsOnPage).limit(itemsOnPage).toArray();
-    res.send({ products, totalPage });
+    res.json({ products, totalPage });
 })
 
 // add product to DB
@@ -57,7 +57,7 @@ router.post('/products/add', async (req, res) => {
 })
 
 // get single product details
-router.get('/product/:id', async (req, res) => {
+router.get('/products/:id', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -67,11 +67,11 @@ router.get('/product/:id', async (req, res) => {
     const id = req.params.id;
     const query = { _id: ObjectId(id) };
     const product = await productsCollection.findOne(query);
-    res.send(product);
+    res.json(product);
 })
 
 // update product info
-router.post('/product/update/:id', async (req, res) => {
+router.post('/products/update/:id', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -111,11 +111,11 @@ router.get('/products/search', async (req, res) => {
 
     // arrange products depending on page number
     const products = result.slice(page * itemsOnPage, (page + 1) * itemsOnPage);
-    res.send({ products, totalPage });
+    res.json({ products, totalPage });
 })
 
-// get products by id for cart items
-router.post('/products/byID', async (req, res) => {
+// get multiple products by id array for cart items
+router.post('/products/many', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
