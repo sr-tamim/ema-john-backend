@@ -44,7 +44,7 @@ router.get('/products', async (req, res) => {
 })
 
 // add product to DB
-router.post('/products/add', async (req, res) => {
+router.post('/add-product', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -57,7 +57,7 @@ router.post('/products/add', async (req, res) => {
 })
 
 // get single product details
-router.get('/products/:id', async (req, res) => {
+router.get('/product-info/:id', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -71,7 +71,7 @@ router.get('/products/:id', async (req, res) => {
 })
 
 // update product info
-router.post('/products/update/:id', async (req, res) => {
+router.post('/update-product/:id', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -90,7 +90,7 @@ router.post('/products/update/:id', async (req, res) => {
 })
 
 // search products by product name
-router.get('/products/search', async (req, res) => {
+router.get('/product-search', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
@@ -115,7 +115,7 @@ router.get('/products/search', async (req, res) => {
 })
 
 // get multiple products by id array for cart items
-router.post('/products/many', async (req, res) => {
+router.post('/multiple-products', async (req, res) => {
     // connect mongodb client
     (client?.topology?.isConnected() || await client.connect())
 
